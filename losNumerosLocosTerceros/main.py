@@ -2,6 +2,9 @@ import numpy as np
 from time import sleep
 
 from horner import horner
+from newtonInterpolation import newtonInterpolation
+from presentResults import presentResults
+from tabulateFunction import tabulateFunction
 
 mainDecision = False
 
@@ -73,3 +76,17 @@ while numberOfNodes is None:
         numberOfNodes = int(input("Enter the number of nodes: "))
     except ValueError:
         print("Invalid input! Please enter a numerical value.")
+
+
+xNodes, yNodes = tabulateFunction(f, lowerInterval, higherInterval, numberOfNodes)
+
+print("\nTablicowane wartości:")
+for xi, yi in zip(xNodes, yNodes):
+    print(f"x = {xi:.3f}, f(x) = {yi:.3f}")
+
+xInterp = float(input("\nPodaj punkt, w którym chcesz obliczyć wartość funkcji: "))
+yInterp = newtonInterpolation(xNodes, yNodes, xInterp)
+
+print(f"\nInterpolowana wartość f({xInterp}) ≈ {yInterp:.6f}")
+
+presentResults(f, xNodes, yNodes, lowerInterval, higherInterval, wzor, xInterp)
