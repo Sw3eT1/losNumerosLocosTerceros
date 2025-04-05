@@ -1,4 +1,7 @@
+import numpy as np
 from time import sleep
+
+from horner import horner
 
 mainDecision = False
 
@@ -25,3 +28,48 @@ while not mainDecision:
             sleep(1)
     else:
         mainDecision = True
+
+
+    match val:
+        case "a":
+            coefficients = [3, -2]
+            f = lambda x: horner(x, coefficients)
+            wzor = wzory[0]
+        case "b":
+            coefficients = [1, 2]
+            f = lambda x: horner(x, coefficients)
+            wzor = wzory[1]
+        case "c":
+            coefficients = [1, -4, 1 ,6]
+            f = lambda x: horner(x, coefficients)
+            wzor = wzory[2]
+        case "d":
+            f = lambda x: np.sin(x)
+            wzor = wzory[3]
+        case "e":
+            f = lambda x: np.sin(np.pow(x,2))
+            wzor = wzory[4]
+
+intervalDecision = False
+
+while not intervalDecision:
+    try:
+        lowerInterval = float(input("Select lower value for the interpolation: "))
+        higherInterval = float(input("Select higher value for the inteprolation: "))
+
+        if higherInterval <= lowerInterval:
+            print("Invalid input! Please choose a second value as the greater one.")
+            sleep(1)
+        else:
+            intervalDecision = True
+
+    except ValueError:
+        print("Invalid input! Please enter numerical values only.")
+        sleep(1)
+        
+numberOfNodes = None
+while numberOfNodes is None:
+    try:
+        numberOfNodes = int(input("Enter the number of nodes: "))
+    except ValueError:
+        print("Invalid input! Please enter a numerical value.")
