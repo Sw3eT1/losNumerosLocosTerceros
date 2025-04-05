@@ -40,7 +40,7 @@ while not mainDecision:
             wzor = wzory[0]
         case "b":
             coefficients = [1, 2]
-            f = lambda x: horner(x, coefficients)
+            f = lambda x: abs(horner(x, coefficients))
             wzor = wzory[1]
         case "c":
             coefficients = [1, -4, 1 ,6]
